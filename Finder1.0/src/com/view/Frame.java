@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 
 import com.controller.Controller;
 
-
 public class Frame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -42,6 +41,7 @@ public class Frame extends JFrame {
 		
 		textField = new JTextField();
 		textField.setText("SAM_1706.JPG");
+		//textField.setText("paper");
 		textField.setBounds(156, 16, 421, 19);
 		getContentPane().add(textField);
 		textField.setColumns(10);
@@ -51,7 +51,6 @@ public class Frame extends JFrame {
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.setBounds(61, 47, 526, 226);
 		fileChooser.setControlButtonsAreShown(false);
-		fileChooser.setCurrentDirectory(new File("/home/"));
 		getContentPane().add(fileChooser);
 		
 		JList<String> list = new JList<String>();
@@ -62,7 +61,8 @@ public class Frame extends JFrame {
 		
 		JButton btnNewButton = new JButton("Procurar");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
+				System.out.println(fileChooser.getSelectedFile().getName());
 				controller.search(fileChooser.getSelectedFile(), textField.getText(), list);
 			}
 		});

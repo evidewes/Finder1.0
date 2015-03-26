@@ -5,7 +5,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import com.controller.Controller;
 
-
 public class Find implements Runnable {
 	
 	private File parent;
@@ -27,15 +26,14 @@ public class Find implements Runnable {
 			} else {
 				if (f.getName().contains(lookingFor)) {
 					// System.out.println(f.getAbsolutePath());
-					controller.found(f);
+					controller.find(f);
 				}
-
 			}
 		}
 
 		if (((ThreadPoolExecutor) controller.getExecutor()).getActiveCount() <= 1) {
 			System.out.println("done!");
-			controller.getExecutor().shutdown();
+			//controller.getExecutor().shutdown();
 		}
 	}
 }

@@ -25,34 +25,37 @@ public class Controller {
 		getExecutor().execute(new Find(parent, lookFor));
 		
 		this.jList = jList;
-		values = new LinkedList<String>();
+		this.values = new LinkedList<String>();
 		this.jList.setModel(new AbstractListModel<String>() {
 
 			private static final long serialVersionUID = 1L;
+			
 			public int getSize() {
 				return values.size();
 			}
+			
 			public String getElementAt(int index) {
 				return values.get(index);
 			}
 		});
 	}
 	
-	public void found(File founded) {
+	public void find(File found) {
 		//System.out.println(founded.getAbsolutePath());
-		values.add(founded.getAbsolutePath());
+		values.add(found.getAbsolutePath());
 		jList.setListData(values.toArray(new String[values.size()]));
 	}
 	
 	private static Controller singleInstance;
+	
 	public static Controller getInstance() {
-		if (singleInstance == null)
+		if (singleInstance == null) {
 			singleInstance = new Controller();
+		}
 		return singleInstance;
 	}
+	
 	private Controller() {
 		executor = Executors.newFixedThreadPool(50);
 	}
-	
-
 }
