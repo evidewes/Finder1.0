@@ -23,6 +23,7 @@ public class Controller {
 	
 	public void search(File parent, String lookFor, JList<String> jList) {
 		getExecutor().execute(new Find(parent, lookFor));
+		
 		this.jList = jList;
 		values = new LinkedList<String>();
 		this.jList.setModel(new AbstractListModel<String>() {
@@ -50,7 +51,7 @@ public class Controller {
 		return singleInstance;
 	}
 	private Controller() {
-		executor = Executors.newCachedThreadPool();
+		executor = Executors.newFixedThreadPool(50);
 	}
 	
 

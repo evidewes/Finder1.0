@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -50,6 +51,7 @@ public class Frame extends JFrame {
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.setBounds(61, 47, 526, 226);
 		fileChooser.setControlButtonsAreShown(false);
+		fileChooser.setCurrentDirectory(new File("/home/"));
 		getContentPane().add(fileChooser);
 		
 		JList<String> list = new JList<String>();
