@@ -19,32 +19,21 @@ public class Find implements Runnable {
 
 	@Override
 	public void run() {
-		if (parent != null
-				&& parent.listFiles() != null
-				&& parent.listFiles().length > 0) {
-			
-			try {
-				for (File f : parent.listFiles()) {
-					
-					if(f.isDirectory() && f.getName().charAt(0) != '.' /* ignorando diretórios ocultos */) {
-						Find find = new Find(f, lookingFor);
-						controller.getExecutor().execute(find);
-						
-					} else {
-						if (f.getName().contains(lookingFor)) {
-							//System.out.println(f.getAbsolutePath());
-							controller
-							.found(f);
-						} 
-		
-					}
+		for (File f : parent.listFiles()) {
+				
+			if(f.isDirectory() && f.getName().charAt(0) != '.' /* ignorando diretórios ocultos */) {
+				Find find = new Find(f, lookingFor);
+				controller.getExecutor().execute(find);
+			} else {
+				if (f.getName().contains(lookingFor)) {
+					// System.out.println(f.getAbsolutePath());
+					controller.found(f);
 				}
-			} catch (Exception e) {
-				System.out.println("########################"+parent);
+
 			}
 		}
-		
-		if (((ThreadPoolExecutor)controller.getExecutor()).getActiveCount() <= 1) {
+
+		if (((ThreadPoolExecutor) controller.getExecutor()).getActiveCount() <= 1) {
 			System.out.println("done!");
 			controller.getExecutor().shutdown();
 		}
