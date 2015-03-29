@@ -14,7 +14,7 @@ import com.model.Find;
 public class Controller {
 	
 	private ExecutorService executor;
-	private  JList<String> jList;
+	private JList<String> jList;
 	private List<String> values;
 	
 	public ExecutorService getExecutor() {
@@ -43,7 +43,7 @@ public class Controller {
 	public void find(File found) {
 		//System.out.println(founded.getAbsolutePath());
 		values.add(found.getAbsolutePath());
-		jList.setListData(values.toArray(new String[values.size()]));
+		jList.setListData(values.toArray(new String[values.size()]));		
 	}
 	
 	private static Controller singleInstance;
