@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JViewport;
 
 import com.controller.Controller;
 
@@ -47,12 +48,12 @@ public class Frame extends JFrame {
 
 		JLabel lblExemplo = new JLabel("exemplos: arquivo.txt;  arq;  txt...");
 		lblExemplo.setBounds(61, 36, 214, 15);
-		lblExemplo.setFont(new Font(lblExemplo.getFont().getName(), Font.ITALIC, lblExemplo.getFont().getSize()));
+		lblExemplo.setFont(new Font(null, Font.ITALIC, lblExemplo.getFont().getSize()));
 		getContentPane().add(lblExemplo);
 
 		textField = new JTextField();
-		textField.setText("SAM_1706.JPG");
-		//textField.setText("paper");
+		//textField.setText("SAM_1706.JPG");
+		textField.setText("paper");
 		textField.setBounds(156, 16, 421, 19);
 		getContentPane().add(textField);
 		textField.setColumns(10);
@@ -72,10 +73,11 @@ public class Frame extends JFrame {
 		DefaultListModel<String> values = new DefaultListModel<String>();
 		JList<String> list = new JList<String>(values);
 		list.setBounds(51, 327, 526, 133);
-		JScrollPane menuScrollPane = new JScrollPane(list);
-		menuScrollPane.setBounds(51, 327, 526, 133);
-		getContentPane().add(menuScrollPane);
-				
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setBounds(51, 327, 526, 133);
+		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+		getContentPane().add(scrollPane);									
+		
 		JButton btnNewButton = new JButton("Procurar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				

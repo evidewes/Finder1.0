@@ -3,13 +3,27 @@ package com.controller;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import javax.swing.DefaultListModel;
+
 import com.model.Find;
 
 public class Controller {
 	
+	private static Controller singleInstance;
 	private ExecutorService executor;	
 	private DefaultListModel<String> values = new DefaultListModel<String>();
+	
+	private Controller() {
+		executor = Executors.newFixedThreadPool(100);
+	}
+	
+	public static Controller getInstance() {
+		if (singleInstance == null) {
+			singleInstance = new Controller();
+		}
+		return singleInstance;
+	}
 	
 	public ExecutorService getExecutor() {
 		return executor;
@@ -22,20 +36,8 @@ public class Controller {
 		this.values.clear();
 	}
 	
-	public void find(File found) {
+	public void find(File found) {		
+		//System.out.println(found.getAbsolutePath());	
 		values.addElement(found.getAbsolutePath());		
-	}
-	
-	private static Controller singleInstance;
-	
-	public static Controller getInstance() {
-		if (singleInstance == null) {
-			singleInstance = new Controller();
-		}
-		return singleInstance;
-	}
-	
-	private Controller() {
-		executor = Executors.newFixedThreadPool(50);
-	}
+	}	
 }

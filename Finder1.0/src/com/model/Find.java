@@ -1,8 +1,6 @@
 package com.model;
 
 import java.io.File;
-import java.util.concurrent.ThreadPoolExecutor;
-
 import com.controller.Controller;
 
 public class Find implements Runnable {
@@ -25,15 +23,9 @@ public class Find implements Runnable {
 				controller.getExecutor().execute(find);
 			} else {
 				if (f.getName().contains(lookingFor)) {
-					// System.out.println(f.getAbsolutePath());
 					controller.find(f);
 				}
 			}
-		}
-
-		if (((ThreadPoolExecutor) controller.getExecutor()).getActiveCount() <= 1) {
-			System.out.println("done!");
-			//controller.getExecutor().shutdown();
-		}
+		}	
 	}
 }
