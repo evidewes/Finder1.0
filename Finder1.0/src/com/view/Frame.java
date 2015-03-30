@@ -8,8 +8,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Locale;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -69,8 +69,8 @@ public class Frame extends JFrame {
 		File typed = new File(initialText);		
 		fileChooser.setSelectedFile(typed);
 		fileChooser.setCurrentDirectory(typed);
-				
-		JList<String> list = new JList<String>();
+		DefaultListModel<String> values = new DefaultListModel<String>();
+		JList<String> list = new JList<String>(values);
 		list.setBounds(51, 327, 526, 133);
 		JScrollPane menuScrollPane = new JScrollPane(list);
 		menuScrollPane.setBounds(51, 327, 526, 133);
@@ -79,7 +79,7 @@ public class Frame extends JFrame {
 		JButton btnNewButton = new JButton("Procurar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				controller.search(fileChooser.getSelectedFile(), textField.getText(), list);
+				controller.search(fileChooser.getSelectedFile(), textField.getText(), values);
 			}
 		});
 		btnNewButton.setBounds(377, 265, 200, 50);

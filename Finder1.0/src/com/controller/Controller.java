@@ -1,49 +1,29 @@
 package com.controller;
 
 import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import javax.swing.AbstractListModel;
-import javax.swing.JList;
-
+import javax.swing.DefaultListModel;
 import com.model.Find;
 
 public class Controller {
 	
-	private ExecutorService executor;
-	private JList<String> jList;
-	private List<String> values;
+	private ExecutorService executor;	
+	private DefaultListModel<String> values = new DefaultListModel<String>();
 	
 	public ExecutorService getExecutor() {
 		return executor;
 	}
 	
-	public void search(File parent, String lookFor, JList<String> jList) {
+	public void search(File parent, String lookFor, DefaultListModel<String> values) {
 		getExecutor().execute(new Find(parent, lookFor));
 		
-		this.jList = jList;
-		this.values = new LinkedList<String>();
-		this.jList.setModel(new AbstractListModel<String>() {
-
-			private static final long serialVersionUID = 1L;
-			
-			public int getSize() {
-				return values.size();
-			}
-			
-			public String getElementAt(int index) {
-				return values.get(index);
-			}
-		});
+		this.values = values;
+		this.values.clear();
 	}
 	
 	public void find(File found) {
-		//System.out.println(founded.getAbsolutePath());
-		values.add(found.getAbsolutePath());
-		jList.setListData(values.toArray(new String[values.size()]));		
+		values.addElement(found.getAbsolutePath());		
 	}
 	
 	private static Controller singleInstance;
