@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JViewport;
 
 import com.controller.Controller;
+import javax.swing.JTextArea;
 
 public class Frame extends JFrame {
 
@@ -38,7 +39,7 @@ public class Frame extends JFrame {
 		// Configurações GERAIS
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-		setSize(new Dimension(600, 500));
+		setSize(new Dimension(600, 800));
 		setVisible(true);
 		getContentPane().setLayout(null);
 
@@ -53,7 +54,7 @@ public class Frame extends JFrame {
 
 		textField = new JTextField();
 		//textField.setText("SAM_1706.JPG");
-		textField.setText("paper");
+		//textField.setText("paper");
 		textField.setBounds(156, 16, 421, 19);
 		getContentPane().add(textField);
 		textField.setColumns(10);
@@ -73,10 +74,11 @@ public class Frame extends JFrame {
 		DefaultListModel<String> values = new DefaultListModel<String>();
 		JList<String> list = new JList<String>(values);
 		list.setBounds(51, 327, 526, 133);
-		JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setBounds(51, 327, 526, 133);
-		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		getContentPane().add(scrollPane);									
+		/*JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setBounds(51, 327, 526, 133);*/
+		//scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+		//getContentPane().add(scrollPane);
+		getContentPane().add(list);
 		
 		JButton btnNewButton = new JButton("Procurar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -86,6 +88,10 @@ public class Frame extends JFrame {
 		});
 		btnNewButton.setBounds(377, 265, 200, 50);
 		getContentPane().add(btnNewButton);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(51, 472, 526, 126);
+		getContentPane().add(textArea);
 	}
 
 	void removeFileTypeComponents(Container con) {		
