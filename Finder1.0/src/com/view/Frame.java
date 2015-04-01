@@ -70,28 +70,23 @@ public class Frame extends JFrame {
 		
 		File typed = new File(initialText);		
 		fileChooser.setSelectedFile(typed);
-		fileChooser.setCurrentDirectory(typed);
-		DefaultListModel<String> values = new DefaultListModel<String>();
-		JList<String> list = new JList<String>(values);
-		list.setBounds(51, 327, 526, 133);
-		/*JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setBounds(51, 327, 526, 133);*/
-		//scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		//getContentPane().add(scrollPane);
-		getContentPane().add(list);
+		fileChooser.setCurrentDirectory(typed);		
+								
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(51, 472, 526, 126);		
+		
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setBounds(51, 327, 526, 133);		
+		getContentPane().add(scrollPane);
 		
 		JButton btnNewButton = new JButton("Procurar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				controller.search(fileChooser.getSelectedFile(), textField.getText(), values);
+				controller.search(fileChooser.getSelectedFile(), textField.getText(), textArea);
 			}
 		});
-		btnNewButton.setBounds(377, 265, 200, 50);
 		getContentPane().add(btnNewButton);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(51, 472, 526, 126);
-		getContentPane().add(textArea);
+		btnNewButton.setBounds(377, 265, 200, 50);
 	}
 
 	void removeFileTypeComponents(Container con) {		

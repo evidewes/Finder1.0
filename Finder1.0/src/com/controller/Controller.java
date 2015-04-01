@@ -3,17 +3,15 @@ package com.controller;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import javax.swing.DefaultListModel;
-
 import com.model.Find;
+import javax.swing.JTextArea;
 
 public class Controller {
 	
 	private static Controller singleInstance;
 	private ExecutorService executor;	
-	private DefaultListModel<String> values = new DefaultListModel<String>();
-	
+	private StringBuilder values = new StringBuilder();
+	private JTextArea textArea;
 	private Controller() {
 		executor = Executors.newFixedThreadPool(100);
 	}
@@ -29,15 +27,16 @@ public class Controller {
 		return executor;
 	}
 	
-	public void search(File parent, String lookFor, DefaultListModel<String> values) {
+	public void search(File parent, String lookFor, JTextArea textArea) {
 		getExecutor().execute(new Find(parent, lookFor));
-		
-		this.values = values;
-		this.values.clear();
+				
+		this.textArea = textArea;
+		this.values = new StringBuilder();
 	}
 	
 	public void find(File found) {		
-		//System.out.println(found.getAbsolutePath());	
-		values.addElement(found.getAbsolutePath());		
+		values.append(found.getAbsolutePath());
+		values.append("\n");
+		textArea.setText(values.toString());
 	}	
 }
